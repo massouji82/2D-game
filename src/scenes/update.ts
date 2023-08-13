@@ -1,6 +1,6 @@
 import { Direction, GridEngine } from "grid-engine";
 
-function update(this: Phaser.Scene) {
+function update(this: Phaser.Scene): void {
   const cursors = this.input.keyboard!.createCursorKeys();
   const gridEngine: GridEngine = (<any>this).gridEngine;
 

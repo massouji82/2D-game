@@ -4,7 +4,7 @@ import create from "@/scenes/create";
 import preload from "@/scenes/preload";
 import update from "@/scenes/update";
 
-const config = {
+const config: Phaser.Types.Core.GameConfig = {
   title: "2D-game",
   render: {
     antialias: false,
@@ -20,15 +20,15 @@ const config = {
     ],
   },
   scale: {
-    width: window.innerWidth,
-    height: window.innerHeight,
+    mode: Phaser.Scale.FIT,
   },
+  width: window.innerWidth,
+  height: window.innerHeight,
   scene: {
     create,
     preload,
     update,
   },
-  parent: "game-container",
   backgroundColor: "#48C4F8",
   input: {
     mouse: {
