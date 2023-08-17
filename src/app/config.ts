@@ -19,17 +19,22 @@ const config: Phaser.Types.Core.GameConfig = {
       },
     ],
   },
+  parent: "game-container",
   scale: {
+    width: (30 * 16),
+    height: (15 * 16),
     mode: Phaser.Scale.FIT,
+
   },
-  width: window.innerWidth,
-  height: window.innerHeight,
   scene: {
-    create,
     preload,
+    create,
     update,
+    physics: {
+      arcade: {
+      }
+    },
   },
-  backgroundColor: "#48C4F8",
   input: {
     mouse: {
       preventDefaultWheel: false,

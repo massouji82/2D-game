@@ -8,7 +8,12 @@ const Home: React.FC = () => {
       {/* <Head>
         <title>My Phaser Game</title>
       </Head> */}
-      <Game />
+      <div
+        id="game-container"
+        className="w-screen h-screen flex justify-center items-center"
+      >
+        <Game />
+      </div>
     </RootLayout>
   );
 };

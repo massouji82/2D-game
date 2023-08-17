@@ -1,8 +1,7 @@
-import { useState, useEffect, RefObject } from "react";
+import { useState, useEffect } from "react";
 
 export function usePhaser(
   config: Phaser.Types.Core.GameConfig,
-  gameContainerRef: RefObject<HTMLDivElement>,
   setStartGame: React.Dispatch<React.SetStateAction<boolean>>
 ): Phaser.Game | null {
   const [game, setGame] = useState<Phaser.Game | null>(null);
@@ -11,11 +10,8 @@ export function usePhaser(
     const initializeGame = async () => {
       const Phaser = await import("phaser");
 
-      if (!game && gameContainerRef) {
-        const newGame = new Phaser.Game({
-          ...config,
-          parent: gameContainerRef.current?.id,
-        });
+      if (!game) {
+        const newGame = new Phaser.Game(config);
         setGame(newGame);
       }
     };
@@ -33,7 +29,7 @@ export function usePhaser(
     return () => {
       game?.destroy(true);
     };
-  }, [config, gameContainerRef, game, setStartGame]);
+  }, [config, setStartGame, game]);
 
   return game;
 }

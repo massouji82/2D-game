@@ -4,7 +4,7 @@ import { slidingDirection } from "./create";
 function update(this: Phaser.Scene): void {
   const gridEngine: GridEngine = (<any>this).gridEngine;
 
-  gridEngine.setSpeed("player", 50);
+  gridEngine.setSpeed("player", 40);
 
   if (slidingDirection !== 'none') {
     gridEngine.move("player", slidingDirection as Direction);

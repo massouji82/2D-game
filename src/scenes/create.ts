@@ -1,13 +1,16 @@
 import { Direction, GridEngine, Position } from "grid-engine";
 
 export let slidingDirection = 'none';
+let coins: Phaser.GameObjects.Sprite[];
+let playerSprite: Phaser.GameObjects.Sprite;
+let levelOneTilemap: Phaser.Tilemaps.Tilemap;
 
 function create(this: Phaser.Scene): void {
   const gridEngine: GridEngine = (<any>this).gridEngine;
 
   const tilemap = createTilemap.call(this);
-  const playerSprite = createPlayerSprite.call(this);
-  setupCamera.call(this, playerSprite);
+  playerSprite = createPlayerSprite.call(this);
+  initCoins.call(this);
 
   const gridEngineConfig = {
     characters: [
@@ -40,26 +43,21 @@ function create(this: Phaser.Scene): void {
 }
 
 function createTilemap(this: Phaser.Scene): Phaser.Tilemaps.Tilemap {
-  const levelOneTilemap = this.make.tilemap({ key: "levelOne" });
-  levelOneTilemap.addTilesetImage("level-one", "tiles");
+  levelOneTilemap = this.make.tilemap({ key: "level-one" });
+  levelOneTilemap.addTilesetImage("level-tileset", "tiles");
+
   for (let i = 0; i < levelOneTilemap.layers.length; i++) {
-    const layer = levelOneTilemap.createLayer(i, "level-one", 0, 0);
-    layer!.scale = 3;
+    const layer = levelOneTilemap.createLayer(i, "level-tileset", 0, 0);
   }
 
   return levelOneTilemap;
 }
 
 function createPlayerSprite(this: Phaser.Scene): Phaser.GameObjects.Sprite {
-  const playerSprite = this.add.sprite(0, 0, "player");
-  playerSprite.scale = 1.5;
+  playerSprite = this.physics.add.sprite(0, 0, "player");
+  playerSprite.scale = 0.5;
 
   return playerSprite;
-}
-
-function setupCamera(this: Phaser.Scene, playerSprite: Phaser.GameObjects.Sprite): void {
-  this.cameras.main.startFollow(playerSprite, true);
-  this.cameras.main.setFollowOffset(-playerSprite.width, -playerSprite.height);
 }
 
 function startMoving(gridEngine: GridEngine, playerSprite: Phaser.GameObjects.Sprite, direction: Direction | 'none'): void {
@@ -83,6 +81,24 @@ function getDirection(fromPos: Position, toPos: Position): Direction | 'none' {
     return 'down' as Direction;
   }
   return 'none';
+}
+
+function initCoins(this: Phaser.Scene): void {
+  const coinPoints = levelOneTilemap.filterObjects('Coins', (obj: any) =>
+    obj.properties[0].name === 'CoinPoint'
+  );
+
+  coins = coinPoints!.map(coinPoint =>
+    this.physics.add.sprite(coinPoint.x!, coinPoint.y!, 'tiles_coin', 133)
+  );
+
+  this.physics.add.overlap(
+    playerSprite,
+    coins,
+    (_playerSprite, coin) => {
+      coin.destroy();
+      this.cameras.main.flash();
+    });
 }
 
 
