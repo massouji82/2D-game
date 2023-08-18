@@ -6,7 +6,7 @@ let playerSprite: Phaser.GameObjects.Sprite;
 let levelOneTilemap: Phaser.Tilemaps.Tilemap;
 
 function create(this: Phaser.Scene): void {
-  const gridEngine: GridEngine = (<any>this).gridEngine;
+  const gridEngine = this.gridEngine;
 
   const tilemap = createTilemap.call(this);
   playerSprite = createPlayerSprite.call(this);

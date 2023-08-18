@@ -2,7 +2,7 @@ import { Direction, GridEngine } from "grid-engine";
 import { slidingDirection } from "./create";
 
 function update(this: Phaser.Scene): void {
-  const gridEngine: GridEngine = (<any>this).gridEngine;
+  const gridEngine = this.gridEngine;
 
   gridEngine.setSpeed("player", 40);
 
