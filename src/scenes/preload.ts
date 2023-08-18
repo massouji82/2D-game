@@ -9,6 +9,8 @@ function preload(this: Phaser.Scene): void {
     frameWidth: 16,
     frameHeight: 16,
   });
+
+  this.load.audio("sfx:coin", '/media/retro-coin.wav');
 }
 
 export default preload;

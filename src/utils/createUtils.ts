@@ -40,6 +40,7 @@ export function getDirection(fromPos: Position, toPos: Position): Direction | 'n
 
 export function initCoins(this: Phaser.Scene): void {
   const player = _createPlayerSprite.call(this);
+  const coinSound = this.sound.add("sfx:coin");
 
   const coinPoints = _levelOneTilemap.filterObjects('Coins', (obj: any) =>
     obj.properties[0].name === 'CoinPoint'
@@ -66,7 +67,9 @@ export function initCoins(this: Phaser.Scene): void {
     (_playerSprite, coin) => {
       coin.destroy();
       this.cameras.main.flash();
-    });
+      coinSound.play();
+    }
+  );
 }
 
 function _createPlayerSprite(this: Phaser.Scene): Phaser.GameObjects.Sprite {
