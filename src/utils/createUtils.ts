@@ -2,17 +2,17 @@ import { Direction, GridEngine, Position } from "grid-engine";
 
 export let slidingDirection = 'none';
 export let playerSprite: Phaser.GameObjects.Sprite;
-let levelOneTilemap: Phaser.Tilemaps.Tilemap;
+let _levelOneTilemap: Phaser.Tilemaps.Tilemap;
 
 export function createTilemap(this: Phaser.Scene): Phaser.Tilemaps.Tilemap {
-  levelOneTilemap = this.make.tilemap({ key: "level-one" });
-  levelOneTilemap.addTilesetImage("level-tileset", "tiles");
+  _levelOneTilemap = this.make.tilemap({ key: "level-one" });
+  _levelOneTilemap.addTilesetImage("level-tileset", "tiles");
 
-  for (let i = 0; i < levelOneTilemap.layers.length; i++) {
-    const layer = levelOneTilemap.createLayer(i, "level-tileset", 0, 0);
+  for (let i = 0; i < _levelOneTilemap.layers.length; i++) {
+    const layer = _levelOneTilemap.createLayer(i, "level-tileset", 0, 0);
   }
 
-  return levelOneTilemap;
+  return _levelOneTilemap;
 };
 
 export function startMoving(gridEngine: GridEngine, direction: Direction | 'none'): void {
@@ -39,15 +39,26 @@ export function getDirection(fromPos: Position, toPos: Position): Direction | 'n
 }
 
 export function initCoins(this: Phaser.Scene): void {
-  const player = createPlayerSprite.call(this);
+  const player = _createPlayerSprite.call(this);
 
-  const coinPoints = levelOneTilemap.filterObjects('Coins', (obj: any) =>
+  const coinPoints = _levelOneTilemap.filterObjects('Coins', (obj: any) =>
     obj.properties[0].name === 'CoinPoint'
   );
 
-  const coins = coinPoints!.map(coinPoint =>
-    this.physics.add.sprite(coinPoint.x!, coinPoint.y!, 'tiles_coin', 133)
-  );
+  const coins = coinPoints!.map(coinPoint => {
+    const coinSprite =
+      this.physics.add.sprite(coinPoint.x!, coinPoint.y!, 'coin', 133);
+
+    coinSprite.anims.create({
+      key: "rotate",
+      frames: this.anims.generateFrameNames('coin', { start: 132, end: 135 }),
+      repeat: -1,
+      frameRate: 10
+    });
+    coinSprite.anims.play('rotate');
+
+    return coinSprite;
+  });
 
   this.physics.add.overlap(
     player,
@@ -58,7 +69,7 @@ export function initCoins(this: Phaser.Scene): void {
     });
 }
 
-function createPlayerSprite(this: Phaser.Scene): Phaser.GameObjects.Sprite {
+function _createPlayerSprite(this: Phaser.Scene): Phaser.GameObjects.Sprite {
   playerSprite = this.physics.add.sprite(0, 0, "player");
   playerSprite.scale = 0.5;
 

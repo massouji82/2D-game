@@ -5,7 +5,7 @@ function preload(this: Phaser.Scene): void {
     frameWidth: 52,
     frameHeight: 72,
   });
-  this.load.spritesheet("tiles_coin", "/assets/objects.png", {
+  this.load.spritesheet("coin", "/assets/objects.png", {
     frameWidth: 16,
     frameHeight: 16,
   });
