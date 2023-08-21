@@ -1,9 +1,12 @@
-import { createTilemap, getDirection, initCoins, playerSprite, startMoving, stopMoving, } from "@/utils/createUtils";
+import { coins, getDirection, initCoins, loadLevel, playerSprite, startMoving, stopMoving, } from "@/utils/createUtils";
 
 function create(this: Phaser.Scene): void {
   const gridEngine = this.gridEngine;
+  let levelKey = "level-one";
+  let level: Phaser.Tilemaps.Tilemap;
 
-  const tilemap = createTilemap.call(this);
+  level = loadLevel.call(this, levelKey);
+
   initCoins.call(this);
 
   const gridEngineConfig = {
@@ -17,7 +20,7 @@ function create(this: Phaser.Scene): void {
     ],
   };
 
-  gridEngine.create(tilemap, gridEngineConfig);
+  gridEngine.create(level, gridEngineConfig);
 
   gridEngine
     .positionChangeStarted()

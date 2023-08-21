@@ -1,6 +1,6 @@
 import { coins } from "./createUtils";
 
-export const startTimer = () => {
+export const timer = (): null => {
   const start = Date.now();
 
   const interval = setInterval(function () {
@@ -10,7 +10,8 @@ export const startTimer = () => {
     if (coins.amount === 0) {
       clearInterval(interval);
       alert(`It took you ${totalSeconds} seconds to clear the level!`);
-      console.log("hello");
     };
   }, 1000);
+
+  return null;
 };

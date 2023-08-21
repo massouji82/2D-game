@@ -1,5 +1,5 @@
-import { startTimer } from "@/utils/timer";
-import { useState, useEffect } from "react";
+import { timer } from "@/utils/timer";
+import { useState, useEffect, useRef, MutableRefObject } from "react";
 
 export function usePhaser(
   config: Phaser.Types.Core.GameConfig,
@@ -20,7 +20,7 @@ export function usePhaser(
     const handleUserGesture = async () => {
       await initializeGame();
       setStartGame(true);
-      startTimer();
+      timer();
       window.removeEventListener("keydown", handleUserGesture);
     };
 
