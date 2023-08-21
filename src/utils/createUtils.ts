@@ -5,19 +5,19 @@ export let playerSprite: Phaser.GameObjects.Sprite;
 export const coins = {
   amount: 1
 };
-let _level: Phaser.Tilemaps.Tilemap;
+let level: Phaser.Tilemaps.Tilemap;
 
 export function loadLevel(this: Phaser.Scene, levelKey: string): Phaser.Tilemaps.Tilemap {
   this.physics.world.colliders.destroy();
-  _level?.destroy();
-  _level = this.make.tilemap({ key: levelKey });
-  _level.addTilesetImage("level-tileset", "tiles");
+  level?.destroy();
+  level = this.make.tilemap({ key: levelKey });
+  level.addTilesetImage("level-tileset", "tiles");
 
-  for (let i = 0; i < _level.layers.length; i++) {
-    _level.createLayer(i, "level-tileset", 0, 0);
+  for (let i = 0; i < level.layers.length; i++) {
+    level.createLayer(i, "level-tileset", 0, 0);
   }
 
-  return _level;
+  return level;
 }
 
 export function startMoving(gridEngine: GridEngine, direction: Direction | "none"): void {
@@ -47,7 +47,7 @@ export function initCoins(this: Phaser.Scene): void {
   const player = _createPlayerSprite.call(this);
   const coinSound = this.sound.add("sfx:coin");
 
-  const coinPoints = _level.filterObjects(
+  const coinPoints = level.filterObjects(
     "Coins",
     (obj: any) => obj.properties[0].name === "CoinPoint"
   );
