@@ -1,4 +1,4 @@
-import { createTilemap, getDirection, initCoins, playerSprite, startMoving, stopMoving } from "@/utils/createUtils";
+import { createTilemap, getDirection, initCoins, playerSprite, startMoving, stopMoving, } from "@/utils/createUtils";
 
 function create(this: Phaser.Scene): void {
   const gridEngine = this.gridEngine;

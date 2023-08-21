@@ -1,3 +1,4 @@
+import { startTimer } from "@/utils/timer";
 import { useState, useEffect } from "react";
 
 export function usePhaser(
@@ -19,6 +20,7 @@ export function usePhaser(
     const handleUserGesture = async () => {
       await initializeGame();
       setStartGame(true);
+      startTimer();
       window.removeEventListener("keydown", handleUserGesture);
     };
 
