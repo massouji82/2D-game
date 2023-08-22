@@ -1,9 +1,11 @@
+import { scene } from "@/scenes/create";
+
 export let level: Phaser.Tilemaps.Tilemap;
 
-export function initLevel(this: Phaser.Scene, levelKey: string): Phaser.Tilemaps.Tilemap {
-  this.physics.world.colliders.destroy();
+export const initLevel = (levelKey: string): Phaser.Tilemaps.Tilemap => {
+  scene.physics.world.colliders.destroy();
   level?.destroy();
-  level = this.make.tilemap({ key: levelKey });
+  level = scene.make.tilemap({ key: levelKey });
   level.addTilesetImage("level-tileset", "tiles");
 
   for (let i = 0; i < level.layers.length; i++) {
@@ -11,4 +13,4 @@ export function initLevel(this: Phaser.Scene, levelKey: string): Phaser.Tilemaps
   }
 
   return level;
-}
+};

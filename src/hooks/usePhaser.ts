@@ -1,10 +1,10 @@
 import { timer } from "@/utils/timer";
 import { useState, useEffect, useRef, MutableRefObject } from "react";
 
-export function usePhaser(
+export const usePhaser = (
   config: Phaser.Types.Core.GameConfig,
   setStartGame: React.Dispatch<React.SetStateAction<boolean>>
-): Phaser.Game | null {
+): Phaser.Game | null => {
   const [game, setGame] = useState<Phaser.Game | null>(null);
 
   useEffect(() => {
@@ -34,4 +34,4 @@ export function usePhaser(
   }, [config, setStartGame, game]);
 
   return game;
-}
+};

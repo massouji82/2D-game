@@ -1,3 +1,4 @@
+import { scene } from "@/scenes/create";
 import { level } from "./initLevel";
 
 export let playerSprite: Phaser.GameObjects.Sprite;
@@ -5,9 +6,9 @@ export const coins = {
   amount: 1
 };
 
-export function initObjects(this: Phaser.Scene): void {
-  const player = _createPlayerSprite.call(this);
-  const coinSound = this.sound.add("sfx:coin");
+export function initObjects(): void {
+  const player = _createPlayerSprite(scene);
+  const coinSound = scene.sound.add("sfx:coin");
 
   const coinPoints = level.filterObjects(
     "Coins",
@@ -16,7 +17,7 @@ export function initObjects(this: Phaser.Scene): void {
 
   const coinList =
     coinPoints!.map((coinPoint): Phaser.Types.Physics.Arcade.SpriteWithDynamicBody => {
-      const coinSprite = this.physics.add.sprite(
+      const coinSprite = scene.physics.add.sprite(
         coinPoint.x!,
         coinPoint.y!,
         "coin",
@@ -25,7 +26,7 @@ export function initObjects(this: Phaser.Scene): void {
       coinSprite.anims.create(
         {
           key: "rotate",
-          frames: this.anims.generateFrameNames("coin", { start: 132, end: 135 }),
+          frames: scene.anims.generateFrameNames("coin", { start: 132, end: 135 }),
           repeat: -1,
           frameRate: 10,
         });
@@ -37,18 +38,19 @@ export function initObjects(this: Phaser.Scene): void {
 
   coins.amount = coinList.length;
 
-  this.physics.add.overlap(player, coinList, (_playerSprite, coin) => {
-    coin.destroy();
-    // this.cameras.main.flash();
-    coinSound.play();
-    --coins.amount;
-  });
-
-  if (coins.amount === 0) this.scene.start();
+  scene.physics.add.overlap(
+    player,
+    coinList,
+    (_playerSprite, coin) => {
+      coin.destroy();
+      // this.cameras.main.flash();
+      coinSound.play();
+      --coins.amount;
+    });
 }
 
-function _createPlayerSprite(this: Phaser.Scene): Phaser.GameObjects.Sprite {
-  playerSprite = this.physics.add.sprite(0, 0, "player");
+function _createPlayerSprite(scene: Phaser.Scene): Phaser.GameObjects.Sprite {
+  playerSprite = scene.physics.add.sprite(0, 0, "player");
   playerSprite.scale = 0.5;
 
   return playerSprite;

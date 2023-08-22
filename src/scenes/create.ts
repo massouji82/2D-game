@@ -2,14 +2,14 @@ import { getDirection, startMoving, stopMoving, } from "@/utils/direction";
 import { initLevel } from "@/utils/initLevel";
 import { initObjects, playerSprite } from "@/utils/initObjects";
 
+export let scene: Phaser.Scene;
+
 function create(this: Phaser.Scene): void {
+  scene = this;
   const gridEngine = this.gridEngine;
-  let levelKey = "level-one";
-  let level: Phaser.Tilemaps.Tilemap;
+  const level = initLevel("level-one");
 
-  level = initLevel.call(this, levelKey);
-
-  initObjects.call(this);
+  initObjects();
 
   const gridEngineConfig = {
     characters: [
