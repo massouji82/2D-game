@@ -14,19 +14,26 @@ export function initObjects(this: Phaser.Scene): void {
     (obj: any) => obj.properties[0].name === "CoinPoint"
   );
 
-  const coinList = coinPoints!.map((coinPoint) => {
-    const coinSprite = this.physics.add.sprite(coinPoint.x!, coinPoint.y!, "coin", 133);
+  const coinList =
+    coinPoints!.map((coinPoint): Phaser.Types.Physics.Arcade.SpriteWithDynamicBody => {
+      const coinSprite = this.physics.add.sprite(
+        coinPoint.x!,
+        coinPoint.y!,
+        "coin",
+        133);
 
-    coinSprite.anims.create({
-      key: "rotate",
-      frames: this.anims.generateFrameNames("coin", { start: 132, end: 135 }),
-      repeat: -1,
-      frameRate: 10,
+      coinSprite.anims.create(
+        {
+          key: "rotate",
+          frames: this.anims.generateFrameNames("coin", { start: 132, end: 135 }),
+          repeat: -1,
+          frameRate: 10,
+        });
+
+      coinSprite.anims.play("rotate");
+
+      return coinSprite;
     });
-    coinSprite.anims.play("rotate");
-
-    return coinSprite;
-  });
 
   coins.amount = coinList.length;
 
