@@ -1,4 +1,4 @@
-import { coins } from "./createUtils";
+import { coins } from "./initObjects";
 
 export const timer = (): null => {
   const start = Date.now();

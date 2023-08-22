@@ -1,6 +1,5 @@
-import { slidingDirection } from "@/utils/createUtils";
+import { slidingDirection } from "@/utils/direction";
 import { Direction } from "grid-engine";
-
 
 function update(this: Phaser.Scene): void {
   const gridEngine = this.gridEngine;

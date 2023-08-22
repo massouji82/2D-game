@@ -1,13 +1,15 @@
-import { coins, getDirection, initCoins, loadLevel, playerSprite, startMoving, stopMoving, } from "@/utils/createUtils";
+import { getDirection, startMoving, stopMoving, } from "@/utils/direction";
+import { initLevel } from "@/utils/initLevel";
+import { initObjects, playerSprite } from "@/utils/initObjects";
 
 function create(this: Phaser.Scene): void {
   const gridEngine = this.gridEngine;
   let levelKey = "level-one";
   let level: Phaser.Tilemaps.Tilemap;
 
-  level = loadLevel.call(this, levelKey);
+  level = initLevel.call(this, levelKey);
 
-  initCoins.call(this);
+  initObjects.call(this);
 
   const gridEngineConfig = {
     characters: [
