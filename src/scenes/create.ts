@@ -7,7 +7,7 @@ export let scene: Phaser.Scene;
 function create(this: Phaser.Scene): void {
   scene = this;
   const gridEngine = this.gridEngine;
-  const level = initLevel("level-one");
+  const level = initLevel();
 
   initObjects();
 

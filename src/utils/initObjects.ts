@@ -7,6 +7,7 @@ export const coins = {
 };
 
 export function initObjects(): void {
+  playerSprite?.destroy();
   const player = _createPlayerSprite(scene);
   const coinSound = scene.sound.add("sfx:coin");
 

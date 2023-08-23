@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, MutableRefObject } from "react";
 
 export const usePhaser = (
   config: Phaser.Types.Core.GameConfig,
-  setStartGame: React.Dispatch<React.SetStateAction<boolean>>
+  setStartGame: React.Dispatch<React.SetStateAction<boolean>>,
 ): Phaser.Game | null => {
   const [game, setGame] = useState<Phaser.Game | null>(null);
 

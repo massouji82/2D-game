@@ -1,7 +1,9 @@
-import { initLevel } from "./initLevel";
-import { coins, initObjects } from "./initObjects";
+import create, { scene } from "@/scenes/create";
+import { coins } from "./initObjects";
 
-export const timer = (): null => {
+export const timer = (
+  setLevelKey: React.Dispatch<React.SetStateAction<number>>
+): null => {
   const start = Date.now();
 
   const interval = setInterval(() => {
@@ -11,8 +13,7 @@ export const timer = (): null => {
     if (coins.amount === 0) {
       clearInterval(interval);
       alert(`It took you ${totalSeconds} seconds to clear the level!`);
-      initLevel("level-two");
-      initObjects();
+      create.call(scene);
     };
   }, 1000);
 
