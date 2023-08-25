@@ -6,7 +6,7 @@ export const coins = {
   amount: 1
 };
 
-export function initObjects(): void {
+export const initObjects = (): void => {
   playerSprite?.destroy();
   const player = _createPlayerSprite(scene);
   const coinSound = scene.sound.add("sfx:coin");
@@ -46,9 +46,8 @@ export function initObjects(): void {
       coin.destroy();
       coinSound.play();
       --coins.amount;
-      scene.game.events.emit("COIN_AMOUNT", coins.amount);
     });
-}
+};
 
 function _createPlayerSprite(scene: Phaser.Scene): Phaser.GameObjects.Sprite {
   playerSprite = scene.physics.add.sprite(0, 0, "player");

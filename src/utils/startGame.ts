@@ -3,7 +3,7 @@ import { initLevel } from "./initLevel";
 import { initObjects, playerSprite } from "./initObjects";
 import { getDirection, startMoving, stopMoving } from "./direction";
 
-export function startGame(gridEngine: GridEngine, levelKey: number = 1): void {
+export const startGame = (gridEngine: GridEngine, levelKey: number = 1): void => {
   const level = initLevel(levelKey);
 
   initObjects();
@@ -28,4 +28,4 @@ export function startGame(gridEngine: GridEngine, levelKey: number = 1): void {
   gridEngine.movementStopped().subscribe(({ charId, direction }) => {
     stopMoving(gridEngine);
   });
-}
+};

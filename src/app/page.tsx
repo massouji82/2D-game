@@ -1,15 +1,17 @@
 // import Head from 'next/head';
 
 import RootLayout from "@/app/layout";
-import { InitGame } from "@/components/InitGame";
+import { Game } from "@/components/Game";
 
-const Home: React.FC = () => {
+const Home: React.FC = (): React.JSX.Element => {
   return (
     <RootLayout>
       {/* <Head>
         <title>My Phaser Game</title>
       </Head> */}
-      <InitGame />
+      <div id="game-container" className="w-screen h-screen flex justify-center items-center">
+        <Game />
+      </div>
     </RootLayout>
   );
 };
