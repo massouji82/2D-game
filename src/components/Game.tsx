@@ -3,13 +3,12 @@
 import React, { useState } from "react";
 import config from "@/app/config";
 import { usePhaser } from "@/hooks/usePhaser";
+import { Timer } from "./Timer";
 
-const Game: React.FC = (): React.JSX.Element => {
+export const Game: React.FC = (): React.JSX.Element => {
   const [startGame, setStartGame] = useState(false);
 
   usePhaser(config, setStartGame);
 
-  return <>{startGame ? <></> : "click any button to start"}</>;
+  return <>{startGame ? <Timer /> : "click any button to start"}</>;
 };
-
-export default Game;

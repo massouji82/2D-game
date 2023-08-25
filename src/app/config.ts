@@ -1,8 +1,9 @@
 import { GridEngine } from "grid-engine";
 import Phaser from "phaser";
-import create from "@/scenes/create";
-import preload from "@/scenes/preload";
-import update from "@/scenes/update";
+
+import { preload } from "@/scenes/preload";
+import { update } from "@/scenes/update";
+import { create } from "@/scenes/create";
 
 const config: Phaser.Types.Core.GameConfig = {
   title: "2D-game",

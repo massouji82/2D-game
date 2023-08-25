@@ -44,9 +44,9 @@ export function initObjects(): void {
     coinList,
     (_playerSprite, coin) => {
       coin.destroy();
-      // this.cameras.main.flash();
       coinSound.play();
       --coins.amount;
+      scene.game.events.emit("COIN_AMOUNT", coins.amount);
     });
 }
 

@@ -1,7 +1,5 @@
 "use client";
 
-const Loading = () => {
+export const Loading = () => {
   return <>Loading ...</>;
 };
-
-export default Loading;

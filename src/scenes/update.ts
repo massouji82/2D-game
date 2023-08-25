@@ -1,7 +1,7 @@
 import { slidingDirection } from "@/utils/direction";
 import { Direction } from "grid-engine";
 
-function update(this: Phaser.Scene): void {
+export function update(this: Phaser.Scene): void {
   const gridEngine = this.gridEngine;
 
   gridEngine.setSpeed("player", 40);
@@ -23,5 +23,3 @@ function update(this: Phaser.Scene): void {
     gridEngine.move("player", Direction.DOWN);
   }
 }
-
-export default update;
