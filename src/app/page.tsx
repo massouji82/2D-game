@@ -3,7 +3,7 @@
 import RootLayout from "@/app/layout";
 import { Game } from "@/components/Game";
 
-const Home: React.FC = (): React.JSX.Element => {
+const Home: React.FC = () => {
   return (
     <RootLayout>
       {/* <Head>

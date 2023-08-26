@@ -1,14 +1,30 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import config from "@/app/config";
 import { usePhaser } from "@/hooks/usePhaser";
 import { Timer } from "./Timer";
 
 export const Game: React.FC = (): React.JSX.Element => {
-  const [startGame, setStartGame] = useState(false);
+  const [gameIsRunning, setGameIsRunning] = useState(false);
+  let totalSeconds = useRef(0);
+  let finishMessage = useRef("");
 
-  usePhaser(config, setStartGame);
+  usePhaser(config, setGameIsRunning);
 
-  return <>{startGame ? <Timer /> : "click any button to start"}</>;
+  return (
+    <>
+      {gameIsRunning ? (
+        <Timer
+          finishMessage={finishMessage}
+          totalSeconds={totalSeconds}
+          setGameIsRunning={setGameIsRunning}
+        />
+      ) : finishMessage.current ? (
+        finishMessage.current
+      ) : (
+        "click any button to start"
+      )}
+    </>
+  );
 };

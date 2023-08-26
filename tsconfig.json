@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/scenes/create.ts",
+    "src/scenes/create.tsx",
     "src/scenes/preload.ts",
     "src/scenes/update.ts"
   ],

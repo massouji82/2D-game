@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 export const usePhaser = (
   config: Phaser.Types.Core.GameConfig,
-  setStartGame: React.Dispatch<React.SetStateAction<boolean>>
+  setGameIsRunning: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
   const [game, setGame] = useState<Phaser.Game | null>(null);
 
@@ -18,7 +18,7 @@ export const usePhaser = (
 
     const handleUserGesture = async () => {
       await initializeGame();
-      setStartGame(true);
+      setGameIsRunning(true);
       window.removeEventListener("keydown", handleUserGesture);
     };
 
@@ -29,5 +29,5 @@ export const usePhaser = (
     return () => {
       game?.destroy(true);
     };
-  }, [config, setStartGame, game]);
+  }, [config, setGameIsRunning, game]);
 };
