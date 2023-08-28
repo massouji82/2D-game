@@ -1,27 +1,26 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import config from "@/app/config";
 import { usePhaser } from "@/hooks/usePhaser";
 import { Timer } from "./Timer";
+import { LowTimes } from "./LowTimes";
 
 export const Game: React.FC = (): React.JSX.Element => {
+  const [game, setGame] = useState<Phaser.Game | null>(null);
+  const [gameOver, setGameOver] = useState(false);
   const [gameIsRunning, setGameIsRunning] = useState(false);
-  let totalSeconds = useRef(0);
-  let finishMessage = useRef("");
 
-  usePhaser(config, setGameIsRunning);
+  usePhaser(game, setGame, config, setGameIsRunning);
 
   return (
     <>
       {gameIsRunning ? (
-        <Timer
-          finishMessage={finishMessage}
-          totalSeconds={totalSeconds}
-          setGameIsRunning={setGameIsRunning}
-        />
-      ) : finishMessage.current ? (
-        finishMessage.current
+        <Timer setGame={setGame} setGameOver={setGameOver} setGameIsRunning={setGameIsRunning} />
+      ) : gameOver ? (
+        <ul>
+          <LowTimes />
+        </ul>
       ) : (
         "click any button to start"
       )}

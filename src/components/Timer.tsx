@@ -1,19 +1,21 @@
 import { scene } from "@/scenes/create";
 import { coins } from "@/utils/initObjects";
+import { checkLowTimes } from "@/utils/lowTimes";
 import { startGame } from "@/utils/startGame";
 import React, { useCallback, useEffect, useRef } from "react";
 
-type TimerType = {
-  finishMessage: React.MutableRefObject<string>;
-  totalSeconds: React.MutableRefObject<number>;
+type TimerTypeProps = {
+  setGame: React.Dispatch<React.SetStateAction<Phaser.Game | null>>;
+  setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
   setGameIsRunning: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const Timer: React.FC<TimerType> = ({
-  finishMessage,
-  totalSeconds,
+export const Timer: React.FC<TimerTypeProps> = ({
+  setGame,
+  setGameOver,
   setGameIsRunning,
 }): null => {
+  const totalSeconds = useRef(0);
   const level = useRef(1);
   const totalLevels = 2;
 
@@ -37,11 +39,13 @@ export const Timer: React.FC<TimerType> = ({
         startInterval();
       };
 
-      const endGame = () => {
+      const gameOver = () => {
         clearIntervalAndIncreaseTime();
-        finishMessage.current = `Congratulations! Your total time was ${totalSeconds.current} seconds!`;
+        checkLowTimes(totalSeconds.current);
+        scene.game.pause();
+        setGameOver(true);
+        setGame(null);
         setGameIsRunning(false);
-        scene.game.destroy(true);
       };
 
       if (coins.amount === 0 && level.current < totalLevels) {
@@ -49,10 +53,10 @@ export const Timer: React.FC<TimerType> = ({
       }
 
       if (coins.amount === 0 && level.current === totalLevels) {
-        endGame();
+        gameOver();
       }
     }, 1000);
-  }, [finishMessage, totalSeconds, setGameIsRunning]);
+  }, [setGame, setGameOver, setGameIsRunning]);
 
   useEffect(() => {
     startInterval();

@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
 export const usePhaser = (
+  game: Phaser.Game | null,
+  setGame: React.Dispatch<React.SetStateAction<Phaser.Game | null>>,
   config: Phaser.Types.Core.GameConfig,
   setGameIsRunning: React.Dispatch<React.SetStateAction<boolean>>
 ): void => {
-  const [game, setGame] = useState<Phaser.Game | null>(null);
-
   useEffect(() => {
     const initializeGame = async () => {
       const Phaser = await import("phaser");
@@ -29,5 +29,5 @@ export const usePhaser = (
     return () => {
       game?.destroy(true);
     };
-  }, [config, setGameIsRunning, game]);
+  }, [config, game, setGameIsRunning, setGame]);
 };
