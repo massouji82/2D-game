@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import config from "@/app/config";
 import { usePhaser } from "@/hooks/usePhaser";
 import { Timer } from "./Timer";
-import { LowTimes } from "./LowTimes";
+import { BestTimes } from "./BestTimes";
 
 export const Game: React.FC = (): React.JSX.Element => {
   const [game, setGame] = useState<Phaser.Game | null>(null);
@@ -19,10 +19,10 @@ export const Game: React.FC = (): React.JSX.Element => {
         <Timer setGame={setGame} setGameOver={setGameOver} setGameIsRunning={setGameIsRunning} />
       ) : gameOver ? (
         <ul>
-          <LowTimes />
+          <BestTimes />
         </ul>
       ) : (
-        "click any button to start"
+        <div className="font-bold text-xl">Click any button to start!</div>
       )}
     </>
   );

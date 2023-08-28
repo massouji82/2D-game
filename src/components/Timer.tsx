@@ -1,6 +1,6 @@
 import { scene } from "@/scenes/create";
 import { coins } from "@/utils/initObjects";
-import { checkLowTimes } from "@/utils/lowTimes";
+import { checkBestTimes } from "@/utils/bestTimes";
 import { startGame } from "@/utils/startGame";
 import React, { useCallback, useEffect, useRef } from "react";
 
@@ -41,8 +41,8 @@ export const Timer: React.FC<TimerTypeProps> = ({
 
       const gameOver = () => {
         clearIntervalAndIncreaseTime();
-        checkLowTimes(totalSeconds.current);
-        scene.game.pause();
+        checkBestTimes(totalSeconds.current);
+        scene.scene.stop();
         setGameOver(true);
         setGame(null);
         setGameIsRunning(false);
