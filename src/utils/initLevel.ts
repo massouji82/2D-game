@@ -1,6 +1,6 @@
 import { scene } from "@/scenes/create";
 
-export let level: Phaser.Tilemaps.Tilemap;
+let level: Phaser.Tilemaps.Tilemap;
 
 export const initLevel = (levelKey: number): Phaser.Tilemaps.Tilemap => {
   scene.physics.world.colliders.destroy();

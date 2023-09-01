@@ -17,7 +17,7 @@ export function preload(this: Phaser.Scene): void {
     frameHeight: 72,
   });
 
-  this.load.spritesheet("coin", "/assets/objects.png", {
+  this.load.spritesheet("coin", "/assets/objects-tileset.png", {
     frameWidth: 16,
     frameHeight: 16,
   });

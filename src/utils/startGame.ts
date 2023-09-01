@@ -2,11 +2,12 @@ import { GridEngine } from "grid-engine";
 import { initLevel } from "./initLevel";
 import { initObjects, playerSprite } from "./initObjects";
 import { getDirection, startMoving, stopMoving } from "./direction";
+import { setStartPosition } from "./setStartPosition";
 
 export const startGame = (gridEngine: GridEngine, levelKey: number = 1): void => {
   const level = initLevel(levelKey);
 
-  initObjects();
+  initObjects(level);
 
   const gridEngineConfig = {
     characters: [
@@ -14,7 +15,7 @@ export const startGame = (gridEngine: GridEngine, levelKey: number = 1): void =>
         id: "player",
         sprite: playerSprite,
         walkingAnimationMapping: 6,
-        startPosition: { x: 8, y: 12 },
+        startPosition: setStartPosition(levelKey),
       },
     ],
   };

@@ -1,12 +1,11 @@
 import { scene } from "@/scenes/create";
-import { level } from "./initLevel";
 
 export let playerSprite: Phaser.GameObjects.Sprite;
 export const coins = {
   amount: 1
 };
 
-export const initObjects = (): void => {
+export const initObjects = (level: Phaser.Tilemaps.Tilemap): void => {
   playerSprite?.destroy();
   const player = _createPlayerSprite(scene);
   const coinSound = scene.sound.add("sfx:coin");
