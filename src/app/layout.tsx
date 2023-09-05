@@ -1,5 +1,5 @@
 import "./globals.css";
-import { pixeloid } from "./pixeloid";
+import { pixeloid } from "./pixeloidFont";
 
 export const metadata = {
   title: "Phaser Game",
