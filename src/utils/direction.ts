@@ -3,12 +3,12 @@ import { Direction, GridEngine, Position } from "grid-engine";
 export let slidingDirection = "none";
 
 export const startMoving = (gridEngine: GridEngine, direction: Direction | "none"): void => {
-  gridEngine.setWalkingAnimationMapping("player", undefined);
+  gridEngine.setWalkingAnimationMapping("player");
   slidingDirection = direction;
 };
 
 export const stopMoving = (gridEngine: GridEngine): void => {
-  gridEngine.setWalkingAnimationMapping("player", 6);
+  gridEngine.setWalkingAnimationMapping("player");
   slidingDirection = "none";
 };
 

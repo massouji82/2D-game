@@ -17,7 +17,7 @@ export const Timer: React.FC<TimerTypeProps> = ({
 }): null => {
   const totalSeconds = useRef(0);
   const level = useRef(1);
-  const totalLevels = 2;
+  const totalLevels = 1;
 
   const startInterval = useCallback(() => {
     const startTime = Date.now();
@@ -26,21 +26,20 @@ export const Timer: React.FC<TimerTypeProps> = ({
       const delta = Date.now() - startTime; // milliseconds elapsed since start
       const seconds = Math.floor(delta / 1000);
 
-      const clearIntervalAndIncreaseTime = (): void => {
+      const clearIntervalAndIncreaseTotalTime = (): void => {
         clearInterval(interval);
         totalSeconds.current += seconds;
       };
 
       const startNextLevel = () => {
-        clearIntervalAndIncreaseTime();
-        alert(`It took you ${seconds} seconds to clear the level!`);
+        clearIntervalAndIncreaseTotalTime();
         level.current++;
         startGame(scene.gridEngine, level.current);
         startInterval();
       };
 
       const gameOver = () => {
-        clearIntervalAndIncreaseTime();
+        clearIntervalAndIncreaseTotalTime();
         checkBestTimes(totalSeconds.current);
         scene.scene.stop();
         setGameOver(true);
@@ -49,6 +48,7 @@ export const Timer: React.FC<TimerTypeProps> = ({
       };
 
       if (coins.amount === 0 && level.current < totalLevels) {
+        scene.events.emit("endLevel");
         startNextLevel();
       }
 

@@ -3,8 +3,11 @@ import { initLevel } from "./initLevel";
 import { initObjects, playerSprite } from "./initObjects";
 import { getDirection, startMoving, stopMoving } from "./direction";
 import { setStartPosition } from "./setStartPosition";
+import { transition } from "./transition";
 
 export const startGame = (gridEngine: GridEngine, levelKey: number = 1): void => {
+  transition();
+
   const level = initLevel(levelKey);
 
   initObjects(level);
@@ -14,7 +17,6 @@ export const startGame = (gridEngine: GridEngine, levelKey: number = 1): void =>
       {
         id: "player",
         sprite: playerSprite,
-        walkingAnimationMapping: 6,
         startPosition: setStartPosition(levelKey),
       },
     ],

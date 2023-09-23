@@ -50,7 +50,7 @@ export const initObjects = (level: Phaser.Tilemaps.Tilemap): void => {
 
 function _createPlayerSprite(scene: Phaser.Scene): Phaser.GameObjects.Sprite {
   playerSprite = scene.physics.add.sprite(0, 0, "player");
-  playerSprite.scale = 0.5;
+  playerSprite.scale = 0.35;
 
   return playerSprite;
 }

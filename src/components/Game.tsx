@@ -18,9 +18,7 @@ export const Game: React.FC = (): React.JSX.Element => {
       {gameIsRunning ? (
         <Timer setGame={setGame} setGameOver={setGameOver} setGameIsRunning={setGameIsRunning} />
       ) : gameOver ? (
-        <ul>
-          <BestTimes />
-        </ul>
+        <BestTimes />
       ) : (
         <div className="font-bold text-xl">Click any button to start!</div>
       )}

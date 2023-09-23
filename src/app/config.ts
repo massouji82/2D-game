@@ -25,7 +25,6 @@ const config: Phaser.Types.Core.GameConfig = {
     width: (30 * 16),
     height: (15 * 16),
     mode: Phaser.Scale.FIT,
-
   },
   scene: {
     preload,
