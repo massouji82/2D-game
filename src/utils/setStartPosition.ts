@@ -12,7 +12,7 @@ export const setStartPosition = (level: number): StartPosition => {
       break;
 
     case 2:
-      startPositon = { x: 11, y: 14 };
+      startPositon = { x: 10, y: 14 };
       break;
 
     case 3:

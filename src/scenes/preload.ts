@@ -5,7 +5,6 @@ export function preload(this: Phaser.Scene): void {
   this.load.tilemapTiledJSON("level-2", "/assets/level-2.json");
   this.load.tilemapTiledJSON("level-3", "/assets/level-3.json");
   this.load.tilemapTiledJSON("level-4", "/assets/level-4.json");
-  this.load.tilemapTiledJSON("level-5", "/assets/level-5.json");
 
   this.load.image("player", "/assets/ufo.png");
 
