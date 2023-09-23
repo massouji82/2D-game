@@ -1,5 +1,4 @@
 import { showBestTimes } from "@/utils/bestTimes";
-import "./besttimes.css";
 
 export const BestTimes: React.FC = (): React.JSX.Element => {
   const bestTimes = showBestTimes();

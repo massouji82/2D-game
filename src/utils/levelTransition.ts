@@ -1,6 +1,6 @@
 import { scene } from "@/scenes/create";
 
-export const transition = () => {
+export const levelTransition = () => {
   const MASK_MIN_SCALE = 0;
   const MASK_MAX_SCALE = 3;
 

@@ -3,10 +3,10 @@ import { initLevel } from "./initLevel";
 import { initObjects, playerSprite } from "./initObjects";
 import { getDirection, startMoving, stopMoving } from "./direction";
 import { setStartPosition } from "./setStartPosition";
-import { transition } from "./transition";
+import { levelTransition } from "./levelTransition";
 
 export const startGame = (gridEngine: GridEngine, levelKey: number = 1): void => {
-  transition();
+  levelTransition();
 
   const level = initLevel(levelKey);
 
