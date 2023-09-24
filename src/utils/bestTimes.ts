@@ -1,5 +1,7 @@
+import { kv } from "@vercel/kv";
+
 const NUM_OF_BEST_TIMES = 10;
-const BEST_TIMES = 'BestTimes';
+const BEST_TIMES = 'bestTimes';
 const DEFAULT_TIME = 1000;
 
 interface BestTime {
@@ -7,9 +9,9 @@ interface BestTime {
   name: string | null;
 }
 
-export const checkBestTimes = (time: number) => {
-  const bestTimesString = localStorage.getItem(BEST_TIMES);
-  const bestTimes: Array<BestTime> = JSON.parse(bestTimesString as string) ?? [];
+export const checkBestTimes = async (time: number) => {
+  const bestTimes = await kv.get(BEST_TIMES) as Array<BestTime> | [];
+  // const bestTimes: Array<BestTime> = bestTimesString ?? [];
   const worstBestTime = bestTimes[NUM_OF_BEST_TIMES - 1]?.time ?? DEFAULT_TIME;
 
   if (time < worstBestTime) {
@@ -18,7 +20,7 @@ export const checkBestTimes = (time: number) => {
   }
 };
 
-const _saveBestTimes = (time: number, bestTimes: Array<BestTime>) => {
+const _saveBestTimes = async (time: number, bestTimes: Array<BestTime>) => {
   let name;
   while (!name) {
     name = prompt('You got a great time! Please enter your name:');
@@ -32,9 +34,17 @@ const _saveBestTimes = (time: number, bestTimes: Array<BestTime>) => {
 
   bestTimes.splice(NUM_OF_BEST_TIMES);
 
-  localStorage.setItem(BEST_TIMES, JSON.stringify(bestTimes));
+  try {
+    await kv.set(BEST_TIMES, bestTimes);
+  } catch (error) {
+    console.error(error);
+  }
+
+  // localStorage.setItem(BEST_TIMES, JSON.stringify(bestTimes));
 };
 
-export const showBestTimes = (): BestTime[] => {
-  return JSON.parse(localStorage.getItem(BEST_TIMES) as string) ?? [];
+export const showBestTimes = async (): Promise<BestTime[]> => {
+  console.log("kv.get(BEST_TIMES)", await kv.get(BEST_TIMES));
+  return await kv.get(BEST_TIMES) ?? [];
+  // return JSON.parse(localStorage.getItem(BEST_TIMES) as string) ?? [];
 };    
