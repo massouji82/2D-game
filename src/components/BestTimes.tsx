@@ -1,7 +1,7 @@
 import { showBestTimes } from "@/utils/bestTimes";
 
-export const BestTimes: React.FC = async (): Promise<React.JSX.Element> => {
-  const bestTimes = await showBestTimes();
+export const BestTimes: React.FC = (): React.JSX.Element => {
+  const bestTimes = showBestTimes();
 
   return (
     <div className="text-center w-1/2 bg-blue-50 bg-opacity-10 p-12 rounded-md">
