@@ -31,7 +31,8 @@
     ".next/types/**/*.ts",
     "src/scenes/create.tsx",
     "src/scenes/preload.ts",
-    "src/scenes/update.ts"
+    "src/scenes/update.ts",
+    "src/hooks/usePhaser.tsx"
   ],
   "exclude": ["node_modules"]
 }

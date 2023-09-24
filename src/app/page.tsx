@@ -2,6 +2,7 @@ import Head from "next/head";
 
 import RootLayout from "@/app/layout";
 import { Game } from "@/components/Game";
+import NoSSr from "@/components/NoSsr";
 
 const Home: React.FC = () => {
   return (
@@ -10,7 +11,9 @@ const Home: React.FC = () => {
         <title>Pixel Coins</title>
       </Head>
       <div id="game-container" className="w-screen h-screen flex justify-center items-center">
-        <Game />
+        <NoSSr>
+          <Game />
+        </NoSSr>
       </div>
     </RootLayout>
   );

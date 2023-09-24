@@ -17,9 +17,11 @@ export const usePhaser = (
     };
 
     const handleUserGesture = async () => {
-      await initializeGame();
-      setGameIsRunning(true);
-      window.removeEventListener("keydown", handleUserGesture);
+      if (typeof window !== "undefined") {
+        await initializeGame();
+        setGameIsRunning(true);
+        window.removeEventListener("keydown", handleUserGesture);
+      }
     };
 
     if (typeof window !== "undefined") {
