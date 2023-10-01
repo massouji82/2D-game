@@ -2,22 +2,24 @@ import { scene } from "@/scenes/create";
 import { coins } from "@/utils/initObjects";
 import { checkBestTimes } from "@/utils/bestTimes";
 import { startGame } from "@/utils/startGame";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 type TimerTypeProps = {
   setGame: React.Dispatch<React.SetStateAction<Phaser.Game | null>>;
   setGameOver: React.Dispatch<React.SetStateAction<boolean>>;
   setGameIsRunning: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCheckingBestTimes: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const Timer: React.FC<TimerTypeProps> = ({
   setGame,
   setGameOver,
   setGameIsRunning,
+  setIsCheckingBestTimes,
 }): null => {
   const totalSeconds = useRef(0);
   const level = useRef(1);
-  const totalLevels = 4;
+  const totalLevels = 1;
 
   const startInterval = useCallback(() => {
     const startTime = Date.now();
@@ -38,13 +40,15 @@ export const Timer: React.FC<TimerTypeProps> = ({
         startInterval();
       };
 
-      const gameOver = () => {
-        clearIntervalAndIncreaseTotalTime();
-        checkBestTimes(totalSeconds.current);
+      const gameOver = async () => {
+        setIsCheckingBestTimes(true);
         scene.scene.stop();
         setGameOver(true);
         setGame(null);
         setGameIsRunning(false);
+        clearIntervalAndIncreaseTotalTime();
+        await checkBestTimes(totalSeconds.current);
+        setIsCheckingBestTimes(false);
       };
 
       if (coins.amount === 0 && level.current < totalLevels) {
@@ -56,7 +60,7 @@ export const Timer: React.FC<TimerTypeProps> = ({
         gameOver();
       }
     }, 1000);
-  }, [setGame, setGameOver, setGameIsRunning]);
+  }, [setGame, setGameOver, setGameIsRunning, setIsCheckingBestTimes]);
 
   useEffect(() => {
     startInterval();

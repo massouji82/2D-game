@@ -5,8 +5,10 @@ import config from "@/app/config";
 import { usePhaser } from "@/hooks/usePhaser";
 import { Timer } from "./Timer";
 import { BestTimes } from "./BestTimes";
+import { Loading } from "./Loading";
 
 export const Game: React.FC = (): React.JSX.Element => {
+  const [isCheckingBestTimes, setIsCheckingBestTimes] = useState(false);
   const [game, setGame] = useState<Phaser.Game | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [gameIsRunning, setGameIsRunning] = useState(false);
@@ -16,9 +18,18 @@ export const Game: React.FC = (): React.JSX.Element => {
   return (
     <>
       {gameIsRunning ? (
-        <Timer setGame={setGame} setGameOver={setGameOver} setGameIsRunning={setGameIsRunning} />
+        <Timer
+          setGame={setGame}
+          setGameOver={setGameOver}
+          setGameIsRunning={setGameIsRunning}
+          setIsCheckingBestTimes={setIsCheckingBestTimes}
+        />
       ) : gameOver ? (
-        <BestTimes />
+        isCheckingBestTimes ? (
+          <Loading />
+        ) : (
+          <BestTimes />
+        )
       ) : (
         <main className="flex flex-col justify-center items-center">
           <h1 className="font-bold text-2xl block">
