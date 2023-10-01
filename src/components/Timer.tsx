@@ -19,7 +19,7 @@ export const Timer: React.FC<TimerTypeProps> = ({
 }): null => {
   const totalSeconds = useRef(0);
   const level = useRef(1);
-  const totalLevels = 4;
+  const totalLevels = 1;
 
   const startInterval = useCallback(() => {
     const startTime = Date.now();
