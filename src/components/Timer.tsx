@@ -3,6 +3,8 @@ import { coins } from "@/utils/initObjects";
 import { checkBestTimes } from "@/utils/bestTimes";
 import { startGame } from "@/utils/startGame";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { music } from "@/utils/initLevel";
+import { stopMoving } from "@/utils/direction";
 
 type TimerTypeProps = {
   setGame: React.Dispatch<React.SetStateAction<Phaser.Game | null>>;
@@ -42,7 +44,9 @@ export const Timer: React.FC<TimerTypeProps> = ({
 
       const gameOver = async () => {
         setIsCheckingBestTimes(true);
+        stopMoving(scene.gridEngine);
         scene.scene.stop();
+        music.stop();
         setGameOver(true);
         setGame(null);
         setGameIsRunning(false);
@@ -52,6 +56,7 @@ export const Timer: React.FC<TimerTypeProps> = ({
       };
 
       if (coins.amount === 0 && level.current < totalLevels) {
+        stopMoving(scene.gridEngine);
         scene.events.emit("endLevel");
         startNextLevel();
       }

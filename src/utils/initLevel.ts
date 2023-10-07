@@ -1,10 +1,11 @@
 import { scene } from "@/scenes/create";
 
 let level: Phaser.Tilemaps.Tilemap;
-let music: Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound;
+export let music: Phaser.Sound.NoAudioSound | Phaser.Sound.HTML5AudioSound | Phaser.Sound.WebAudioSound;
 
 export const initLevel = (levelKey: number): Phaser.Tilemaps.Tilemap => {
   scene.physics.world.colliders.destroy();
+  music?.stop();
   level?.destroy();
   scene.events.emit("startLevel");
 
