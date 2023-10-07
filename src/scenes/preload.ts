@@ -14,4 +14,5 @@ export function preload(this: Phaser.Scene): void {
   });
 
   this.load.audio("sfx:coin", '/media/retro-coin.wav');
+  this.load.audio("theme", '/media/music.m4a');
 }
